@@ -28,7 +28,7 @@ public class BankAccountSystem {
 		System.out.println("Welcome to Bank Account System !!!");
 
 		try {
-			writeTofile("Amount");
+			writeTofile(AMOUNT);
 			while (true) {
 				System.out.println("Please enter in a command (Deposit, Withdraw, Balance, Exit)");
 
@@ -139,9 +139,9 @@ public class BankAccountSystem {
 			BufferedReader in = new BufferedReader(new FileReader(file));
 			String str;
 			while ((str = in.readLine()) != null) {
-				if (str.contains("<p>")) {
-					str = str.replaceAll("<p>", "");
-					str = str.replaceAll("</p>", "");
+				if (str.contains("<tr><td>")) {
+					str = str.replaceAll("<tr><td>", "");
+					str = str.replaceAll("</td></tr>", "");
 					amount += Double.parseDouble(str);
 				}
 			}
@@ -195,16 +195,20 @@ public class BankAccountSystem {
 			fw = new FileWriter(file.getAbsoluteFile(), true);
 			bw = new BufferedWriter(fw);
 
+			StringBuilder sb = new StringBuilder();
 			if (value.equalsIgnoreCase(AMOUNT)) {
-				value = "<h3>" + value + "</h3>";
+				sb.append("<table>");
+				sb.append("<tr><th>" + value + "</th></tr>");
 			} else {
-				value = "<p>" + value + "<p>";
+				sb.append("<tr><td>" + value + "</td></tr>");
 			}
 
-			if (file.length() != 0) {
-				String newLine = System.getProperty("line.separator");
-				value = newLine + value;
-			}
+			// if (file.length() != 0) {
+			String newLine = System.getProperty("line.separator");
+			value = sb.toString() + newLine;
+			// } else {
+			// value = sb.toString();
+			// }
 
 			bw.write(value.toString());
 			// bw.newLine();
