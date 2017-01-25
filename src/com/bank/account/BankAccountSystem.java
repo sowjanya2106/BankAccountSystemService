@@ -10,6 +10,11 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 
+ * @author sowjanya
+ *
+ */
 public class BankAccountSystem {
 
 	public static final String FILENAME = "log.html";
@@ -30,6 +35,7 @@ public class BankAccountSystem {
 				String str = br.readLine();
 				if (str != null) {
 					String lcString = str.toLowerCase();
+					// checks for the valid command
 					if (OptionsEnum.searchValue(lcString)) {
 						switch (lcString) {
 						case "deposit":
@@ -60,6 +66,16 @@ public class BankAccountSystem {
 		}
 	}
 
+	/**
+	 * This method validates the amount inputed and adds the positive amount to
+	 * the log.html
+	 * 
+	 * @param br
+	 * @return true if deposit is successful else false. If the deposit is
+	 *         successful , the amount is added to log.html file
+	 * @throws IOException
+	 */
+
 	public static Boolean depositAmount(BufferedReader br) throws IOException {
 		Boolean isDeposited = false;
 
@@ -78,6 +94,15 @@ public class BankAccountSystem {
 
 	}
 
+	/**
+	 * This method validates the amount inputed and adds the negative amount to
+	 * the log.html
+	 * 
+	 * @param br
+	 * @return true or false
+	 * @throws IOException
+	 */
+
 	public static Boolean withdrawAmount(BufferedReader br) throws IOException {
 		Boolean isWithdrawn = false;
 		String amountStr = null;
@@ -94,6 +119,12 @@ public class BankAccountSystem {
 
 	}
 
+	/**
+	 * This method scans each line in the file and sums the amount.
+	 * 
+	 * @return the balance
+	 * @throws IOException
+	 */
 	public static Double getCurrentBalance() throws IOException {
 
 		// Read file and get the balance
@@ -122,6 +153,13 @@ public class BankAccountSystem {
 
 	}
 
+	/**
+	 * This method does validation for input data amount(positive and upto 2
+	 * decimal)
+	 * 
+	 * @param str
+	 * @return true or false places) else false
+	 */
 	public static Boolean isValidDataForInput(String str) {
 		if (str != null) {
 			Pattern p = Pattern.compile("(^[0-9]+(\\.[0-9]{1,2})?$)");
@@ -133,6 +171,12 @@ public class BankAccountSystem {
 		return false;
 
 	}
+
+	/**
+	 * This method writes the value to the log.html
+	 * 
+	 * @param value
+	 */
 
 	public static void writeTofile(String value) {
 		BufferedWriter bw = null;

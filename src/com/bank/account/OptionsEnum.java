@@ -1,5 +1,10 @@
 package com.bank.account;
 
+/**
+ * 
+ * @author sowjanya
+ *
+ */
 public enum OptionsEnum {
 	BALANCE("balance"), DEPOSIT("deposit"), WITHDRAW("withdraw"), EXIT("exit");
 
