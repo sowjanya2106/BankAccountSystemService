@@ -28,6 +28,7 @@ public class BankAccountSystem {
 		System.out.println("Welcome to Bank Account System !!!");
 
 		try {
+			//Add table header
 			writeTofile(AMOUNT);
 			while (true) {
 				System.out.println("Please enter in a command (Deposit, Withdraw, Balance, Exit)");
@@ -140,6 +141,7 @@ public class BankAccountSystem {
 			String str;
 			while ((str = in.readLine()) != null) {
 				if (str.contains("<tr><td>")) {
+					// Fetch value from html tags
 					str = str.replaceAll("<tr><td>", "");
 					str = str.replaceAll("</td></tr>", "");
 					amount += Double.parseDouble(str);
@@ -162,6 +164,7 @@ public class BankAccountSystem {
 	 */
 	public static Boolean isValidDataForInput(String str) {
 		if (str != null) {
+			// Regex expression for decimal numbers with 2 decimal places
 			Pattern p = Pattern.compile("(^[0-9]+(\\.[0-9]{1,2})?$)");
 			Matcher m = p.matcher(str);
 			if (m.find()) {
@@ -203,15 +206,10 @@ public class BankAccountSystem {
 				sb.append("<tr><td>" + value + "</td></tr>");
 			}
 
-			// if (file.length() != 0) {
 			String newLine = System.getProperty("line.separator");
 			value = sb.toString() + newLine;
-			// } else {
-			// value = sb.toString();
-			// }
 
 			bw.write(value.toString());
-			// bw.newLine();
 
 		} catch (IOException e) {
 
